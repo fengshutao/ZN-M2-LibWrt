@@ -14,6 +14,7 @@ env:
   DIY_SCRIPT: scripts/Roc-script.sh
   CLASH_KERNEL: amd64
   FIRMWARE_TAG: IPQ60XX
+  TZ: Asia/Shanghai
 
 jobs:
   Build:
