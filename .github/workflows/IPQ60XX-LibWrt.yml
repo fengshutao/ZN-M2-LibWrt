@@ -148,12 +148,12 @@ jobs:
         body: |
           **This is OpenWrt Firmware for ZN-M2 (Qualcomm IPQ60XX)**
           ### 📒 固件信息
-          - 针对 **兆能 ZN-M2** 深度定制的 NSS 6.12 内核固件。
+          - 针对 **兆能 ZN-M2** 深度定制 NSS 6.12 内核固件。
           - 🌐 默认地址: **192.168.2.1**
           - 🔑 默认密码: **none**
           - 🚀 核心更新：移除 PassWall，替换为 **OpenClash**。
-          - 🧹 稳定性优化：已移除 SmartDNS, WOL, FRPC/S, SQM, WireGuard, Samba4, Aria2, Lucky, OAF 等 19 项插件。
-          - 🛠️ 包含插件：cpufreq, ttyd, upnp, diskman, watchcat, 3cat。
+          - 🧹 稳定性优化：已精简移除多项插件。
+          - 🛠️ 包含插件：cpufreq, upnp,, ddns, diskman。
           ### 🧊 固件版本
           - 固件内核版本：**${{ env.VERSION_KERNEL }}**
           - ${{ env.VERSION_INFO }}
