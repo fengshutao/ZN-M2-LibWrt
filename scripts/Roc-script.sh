@@ -1,3 +1,4 @@
+#!/bin/bash
 # 修改默认IP & 固件名称 & 编译署名
 sed -i 's/192.168.1.1/192.168.2.1/g' package/base-files/files/bin/config_generate
 sed -i "s/hostname='.*'/hostname='Roc'/g" package/base-files/files/bin/config_generate
@@ -14,7 +15,7 @@ sed -i "s#_('Firmware Version'), (L\.isObject(boardinfo\.release) ? boardinfo\.r
                 }, [ 'Built by Roc $(date "+%Y-%m-%d %H:%M:%S")' ])\n \
             ]),#" feeds/luci/modules/luci-mod-status/htdocs/luci-static/resources/view/status/include/10_system.js
 
-# 移除不再需要的包源码
+# 移除不再需要的包源码 (防止与新插件冲突)
 rm -rf feeds/luci/applications/luci-app-argon-config
 rm -rf feeds/luci/applications/luci-app-wechatpush
 rm -rf feeds/luci/applications/luci-app-appfilter
@@ -28,7 +29,7 @@ rm -rf feeds/packages/net/ariang
 rm -rf feeds/packages/net/frp
 rm -rf feeds/packages/lang/golang
 
-# Git稀疏克隆基础工具
+# Git稀疏克隆函数
 function git_sparse_clone() {
   branch="$1" repourl="$2" && shift 2
   git clone --depth=1 -b $branch --single-branch --filter=blob:none --sparse $repourl
@@ -38,21 +39,23 @@ function git_sparse_clone() {
   cd .. && rm -rf $repodir
 }
 
-# 克隆必要插件
+# 克隆必要基础组件
 git_sparse_clone master https://github.com/laipeng668/packages lang/golang
 mv -f package/golang feeds/packages/lang/golang
 git clone --depth=1 https://github.com/jerrykuku/luci-theme-argon feeds/luci/themes/luci-theme-argon
 git clone --depth=1 https://github.com/jerrykuku/luci-app-argon-config feeds/luci/applications/luci-app-argon-config
 
-### 核心插件：OpenClash ###
-rm -rf package/luci-app-openclash
-git clone --depth=1 https://github.com/vernesong/OpenClash package/luci-app-openclash
-
-# 清理 PassWall 及其残留
+### 核心替换：移除 PassWall 并安装 OpenClash ###
+# 清理 PassWall 相关及其依赖的旧核心库
 rm -rf feeds/packages/net/{xray-core,v2ray-geodata,sing-box,chinadns-ng,dns2socks,hysteria,ipt2socks,microsocks,naiveproxy,shadowsocks-libev,shadowsocks-rust,shadowsocksr-libev,simple-obfs,tcping,trojan-plus,tuic-client,v2ray-plugin,xray-plugin,geoview,shadow-tls}
 rm -rf feeds/luci/applications/luci-app-passwall
 rm -rf package/passwall-packages
 rm -rf package/luci-app-passwall
 
+# 安装 OpenClash
+rm -rf package/luci-app-openclash
+git clone --depth=1 https://github.com/vernesong/OpenClash package/luci-app-openclash
+
+# 更新 Feeds
 ./scripts/feeds update -a
 ./scripts/feeds install -a
