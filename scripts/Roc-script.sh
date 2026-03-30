@@ -2,7 +2,7 @@
 # 修改默认IP 
 sed -i 's/192.168.1.1/192.168.2.1/g' package/base-files/files/bin/config_generate
 
-# 移除不再需要的包源码 (防止与新插件冲突)
+# 移除不再需要的包源码
 rm -rf feeds/luci/applications/luci-app-argon-config
 rm -rf feeds/luci/applications/luci-app-wechatpush
 rm -rf feeds/luci/applications/luci-app-appfilter
@@ -33,7 +33,6 @@ git clone --depth=1 https://github.com/jerrykuku/luci-theme-argon feeds/luci/the
 git clone --depth=1 https://github.com/jerrykuku/luci-app-argon-config feeds/luci/applications/luci-app-argon-config
 
 ### 核心替换：移除 PassWall 并安装 OpenClash ###
-# 清理 PassWall 相关及其依赖的旧核心库
 rm -rf feeds/packages/net/{xray-core,v2ray-geodata,sing-box,chinadns-ng,dns2socks,hysteria,ipt2socks,microsocks,naiveproxy,shadowsocks-libev,shadowsocks-rust,shadowsocksr-libev,simple-obfs,tcping,trojan-plus,tuic-client,v2ray-plugin,xray-plugin,geoview,shadow-tls}
 rm -rf feeds/luci/applications/luci-app-passwall
 rm -rf package/passwall-packages
@@ -43,6 +42,5 @@ rm -rf package/luci-app-passwall
 rm -rf package/luci-app-openclash
 git clone --depth=1 https://github.com/vernesong/OpenClash package/luci-app-openclash
 
-# 更新 Feeds
 ./scripts/feeds update -a
 ./scripts/feeds install -a
