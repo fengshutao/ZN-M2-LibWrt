@@ -146,17 +146,15 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
         artifacts: ${{ env.FIRMWARE_PATH }}/*
         body: |
-          **This is OpenWrt Firmware for ${{ env.FIRMWARE_TAG }}**
+          **This is OpenWrt Firmware for ZN-M2**
           ### 📒 固件信息
-          - 这是开启全功能NSS的6.12内核固件，默认主题为Aurora；该固件在ImmortalWrt的基础上，添加了额外的软件包cpufreq、ddns、ttyd、upnp、wol、samba4、vlmcsd、aria2、autoreboot、uhttpd、wifischedule、frps、frpc、diskman、hd-idle、banip、acme、arpbind、usb-printer、passwall、oaf、sqm、wireguard、watchcat、wechatpush、3cat、smartdns，并添加了若干工具，具体详见IPQ60XX.config和General.config。
-          - 💻 这是 ${{ env.FIRMWARE_TAG }} 平台使用的 OpenWrt 固件
-          - ⚽ 固件源码: ${{ env.REPO_URL }}
-          - 💝 源码分支: ${{ env.REPO_BRANCH }}
-          - 🌐 默认地址: **192.168.2.1**
-          - 🔑 默认密码: none
+          - 针对兆能 ZN-M2 优化的 NSS 6.12 内核固件。
+          - 默认地址: **192.168.2.1**，默认密码: none。
+          - 核心插件：替换 PassWall 为 **OpenClash**。
+          - 已移除：SmartDNS, WOL, FRPC/S, SQM, WireGuard, Samba4, Aria2, Lucky 等冗余插件。
+          - 包含工具：cpufreq, ttyd, upnp, diskman, watchcat, 3cat。
           ### 🧊 固件版本
           - 固件内核版本：**${{ env.VERSION_KERNEL }}**
-          - 固件编译前最后一次➦[主源码](${{ env.REPO_URL }})更新记录
           - ${{ env.VERSION_INFO }}
 
     - name: Delete Old Cache(删除旧缓存)
