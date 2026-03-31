@@ -55,7 +55,7 @@ jobs:
         git clone --depth 1 -b $REPO_BRANCH --single-branch $REPO_URL /mnt/openwrt
         cd /mnt/openwrt
         echo "OPENWRT_PATH=$PWD" >> $GITHUB_ENV
-        VERSION_INFO=$(git show -s --date=short --format="作者: %an<br/>时间: %cd<br/>内容: %s<br/>hash: %H")
+        VERSION_INFO=$(git show -s --date=short --format="时间: %cd<br/>内容: %s<br/>hash: %H")
         echo "VERSION_INFO=$VERSION_INFO" >> $GITHUB_ENV
         VERSION_KERNEL=$(grep -oP 'LINUX_KERNEL_HASH-\K[0-9]+\.[0-9]+\.[0-9]+' target/linux/generic/kernel-6.12)
         echo "VERSION_KERNEL=$VERSION_KERNEL" >> $GITHUB_ENV
@@ -152,7 +152,7 @@ jobs:
           - 🌐 默认地址: **192.168.2.1**
           - 🔑 默认密码: **none**
           - 🚀 核心更新：移除 PassWall，替换为 **OpenClash**。
-          - 🧹 稳定性优化：已精简移除多项插件。
+          - 🧹 稳定性已优化。
           - 🛠️ 包含插件：cpufreq, upnp, ddns, diskman。
           ### 🧊 固件版本
           - 固件内核版本：**${{ env.VERSION_KERNEL }}**
