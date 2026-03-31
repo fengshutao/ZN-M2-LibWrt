@@ -153,7 +153,7 @@ jobs:
           - 🔑 默认密码: **none**
           - 🚀 核心更新：移除 PassWall，替换为 **OpenClash**。
           - 🧹 稳定性优化：已精简移除多项插件。
-          - 🛠️ 包含插件：cpufreq, upnp,, ddns, diskman。
+          - 🛠️ 包含插件：cpufreq, upnp, ddns, diskman。
           ### 🧊 固件版本
           - 固件内核版本：**${{ env.VERSION_KERNEL }}**
           - ${{ env.VERSION_INFO }}
