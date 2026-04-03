@@ -1,4 +1,4 @@
-name: IPQ60XX-LibWrt
+name: IPQ60XX-LibWrt-25.12-nss
 
 on:
   workflow_dispatch:
