@@ -43,7 +43,7 @@ mv -f package/golang feeds/packages/lang/golang
 # 6. 安装 OpenClash (放置在 package 目录)
 rm -rf package/luci-app-openclash
 git clone --depth=1 https://github.com/vernesong/OpenClash package/luci-app-openclash
-
+git clone --depth=1 https://github.com/gdy666/luci-app-lucky.git package/lucky
 # 7. 更新并安装 feeds
 ./scripts/feeds update -a
 ./scripts/feeds install -a
