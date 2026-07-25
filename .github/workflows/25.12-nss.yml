@@ -5,7 +5,10 @@ on:
   workflow_call:
   # schedule:
   #   - cron: 0 20 * * *
-
+permissions:
+  contents: write      # ← 允许创建/修改 Release
+  actions: write       # ← 允许删除缓存（Delete Old Cache 步骤需要）
+  
 env:
   REPO_URL: https://github.com/LiBwrt/openwrt-6.x.git
   REPO_BRANCH: 25.12-nss
